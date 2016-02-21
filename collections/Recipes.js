@@ -14,6 +14,9 @@ RecipeSchema = new SimpleSchema({ //creamos un nuevo schema
 		label: "Autor",
 		autoValue: function(){
 			return this.userId
+		},
+		autoform:{
+			type:"hidden"
 		}
 	},
 	creadoEn: {
@@ -21,6 +24,9 @@ RecipeSchema = new SimpleSchema({ //creamos un nuevo schema
 		label: "Fecha de creación",
 		autoValue: function(){
 			return new Date()
+		},
+		autoform:{
+			type:"hidden"
 		}
 
 	}
