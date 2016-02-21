@@ -1,4 +1,30 @@
-Recipes = new Meteor.Collection('recipes'); // definiendo una Collection
+Recipes = new Mongo.Collection('recipes'); // definiendo una Collection
+Recipes.allow({
+	insert: function (userId, doc) { //permisos para publicar
+		return !!userId;
+	},
+/*	update: function (userId, doc, fields, modifier) {
+		//...
+	},
+	remove: function (userId, doc) {
+		//...
+	},
+	fetch: ['owner'],
+	transform: function () {
+		//...
+	}*/
+});
+
+Ingredient =new SimpleSchema({
+	nombre:{
+		type: String,
+		label: "Ingrediente"
+	},
+	cantidad:{
+		type: String,
+		label: "Cantidad"
+	}
+});
 
 RecipeSchema = new SimpleSchema({ //creamos un nuevo schema
 	nombre: {
@@ -9,6 +35,18 @@ RecipeSchema = new SimpleSchema({ //creamos un nuevo schema
 		type: String,
 		label: "Descripción"
 	},
+	Ingredientes:{
+		type: [Ingredient]	
+	},
+	inMenu: {
+		type: Boolean,
+		defaultValue: false,
+		optional: true,
+		autoform:{
+			type:"hidden"
+		}
+	},
+
 	autor:{
 		type: String,
 		label: "Autor",
