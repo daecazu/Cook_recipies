@@ -3,9 +3,10 @@ Recipes.allow({
 	insert: function (userId, doc) { //permisos para publicar
 		return !!userId;
 	},
-/*	update: function (userId, doc, fields, modifier) {
-		//...
+    update: function (userId, doc) { //actualizar
+		return !!userId;
 	},
+	/*
 	remove: function (userId, doc) {
 		//...
 	},
@@ -73,3 +74,14 @@ RecipeSchema = new SimpleSchema({ //creamos un nuevo schema
 });
 
 Recipes.attachSchema( RecipeSchema);
+
+//metodo para actualizar 
+Meteor.methods({
+	toggleMenuItem: function(id,currentState){
+		Recipes.update(id, {$set: {
+									inMenu: !currentState}
+							
+		});
+	},
+
+});
